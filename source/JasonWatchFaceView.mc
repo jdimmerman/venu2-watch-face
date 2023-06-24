@@ -1,6 +1,8 @@
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
+import Toybox.Activity;
+import Toybox.ActivityMonitor;
 import Toybox.WatchUi;
 
 class JasonWatchFaceView extends WatchUi.WatchFace {
@@ -22,11 +24,23 @@ class JasonWatchFaceView extends WatchUi.WatchFace {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        // Get and show the current time
         var clockTime = System.getClockTime();
-        var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
-        var view = View.findDrawableById("TimeLabel") as Text;
-        view.setText(timeString);
+        var hour = System.getDeviceSettings().is24Hour ? clockTime.hour : clockTime.hour % 12;
+        var timeString = Lang.format("$1$:$2$", [hour, clockTime.min.format("%02d")]);
+        var timeView = View.findDrawableById("TimeLabel") as Text;
+        timeView.setText(timeString);
+
+        var activityInfo = Activity.getActivityInfo();
+        var heartRateSample = activityInfo.currentHeartRate;
+        var heartRateValue = null;
+        if (heartRateSample != null) {
+            heartRateValue = heartRateSample.format("%d");
+        }
+        var heartRateView = View.findDrawableById("HeartRateLabel") as Text;
+        if (heartRateValue == null) {
+            heartRateValue = "-";
+        }
+        heartRateView.setText(heartRateValue);
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);

@@ -1,1 +1,4 @@
 developer_key
+bin
+dist
+.DS_Store

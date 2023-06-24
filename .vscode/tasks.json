@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "env": {
+        "Path": "${env:Path}" 
+    },
+    "tasks": [{
+        "label": "Build + Run in Simulator",
+        "command": "./run-in-simulator.sh",
+        // "args": ["test"],
+        "type": "shell",
+        
+    }]
+}
