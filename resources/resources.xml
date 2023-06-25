@@ -1,6 +1,5 @@
 <resources>    
     <fonts>
-   	    <font antialias="true" id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
-   	    <font antialias="true" id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
+		<font id="crystalIcons" filename="fonts/crystal-icons.fnt" antialias="true" />
     </fonts>
 </resources>

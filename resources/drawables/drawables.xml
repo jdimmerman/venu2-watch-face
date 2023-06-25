@@ -1,7 +1,3 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
-    <!-- <bitmap id="HeartIcon" filename="icons/heart.svg" />
-    <bitmap id="BatteryIcon" filename="icons/battery.png" />
-    <bitmap id="StairsIcon" filename="icons/stairs.png" />
-    <bitmap id="FootprintsIcon" filename="icons/footprints.png" /> -->
 </drawables>
