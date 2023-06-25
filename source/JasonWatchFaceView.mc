@@ -7,9 +7,7 @@ import Toybox.WatchUi;
 import Toybox.Application;
 
 // TODO
-// * format steps to be in the thousands with k
 // * fix icons
-// * make time larger and cenetered vertically
 
 class JasonWatchFaceView extends WatchUi.WatchFace {
 var font = null;
@@ -49,8 +47,8 @@ var font = null;
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(
             screenWidth / 2,
-            screenHeight / 2,
-            Graphics.FONT_SMALL,
+            screenHeight / 2 - dc.getFontHeight(Graphics.FONT_MEDIUM),
+            Graphics.FONT_MEDIUM,
             timeString,
             Graphics.TEXT_JUSTIFY_CENTER);
 
@@ -79,13 +77,13 @@ var font = null;
         // Floors
         var floors = activityMonitorInfo.floorsClimbed;
         dc.drawText(
-            screenWidth * 0.25 + 25,
+            screenWidth * 0.25,
             screenHeight * 0.75,
             Graphics.FONT_SMALL,
             floors.toString(),
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(
-            screenWidth * 0.25 + 30,
+            screenWidth * 0.25,
             screenHeight * 0.75 - dc.getFontHeight(Graphics.FONT_SMALL) / 2,
             font,
             "w",
@@ -93,14 +91,20 @@ var font = null;
 
         // Steps
         var steps = activityMonitorInfo.steps;
+        steps = 3459;
+        var stepsString = steps.toString();
+        if (steps > 999) {
+            var stepThousands = steps / 1000.0;
+            stepsString = Lang.format("$1$k", [stepThousands.format("%.1f")]);
+        }
         dc.drawText(
-            screenWidth * 0.75 - 30,
+            screenWidth * 0.75,
             screenHeight * 0.75,
             Graphics.FONT_SMALL,
-            steps.toString(),
+            stepsString,
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(
-            screenWidth * 0.75 + 25,
+            screenWidth * 0.75,
             screenHeight * 0.75 - dc.getFontHeight(Graphics.FONT_SMALL) / 2,
             font,
             "w",
@@ -120,46 +124,6 @@ var font = null;
             font,
             "w",
             Graphics.TEXT_JUSTIFY_CENTER);
-
-        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(30, 10, Graphics.FONT_MEDIUM, steps.toString(), Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(screenWidth / 2, 25, Graphics.FONT_SMALL,"/" + stepGoal, Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(30, 45, Graphics.FONT_MEDIUM, calories.toString(), Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(screenWidth / 2, 60, Graphics.FONT_SMALL, "calories" , Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(30, 80, Graphics.FONT_MEDIUM, battery + "%", Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(screenWidth / 2, 95, Graphics.FONT_SMALL, "battery" , Graphics.TEXT_JUSTIFY_LEFT);
-
-        // dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(screenWidth / 2, screenHeight / 2, font, "wh", Graphics.TEXT_JUSTIFY_CENTER);
-
-        // var clockTime = System.getClockTime();
-        // var hour = System.getDeviceSettings().is24Hour ? clockTime.hour : clockTime.hour % 12;
-        // var timeString = Lang.format("$1$:$2$", [hour, clockTime.min.format("%02d")]);
-        // var timeView = View.findDrawableById("TimeLabel") as Text;
-        // timeView.setText(timeString);
-
-        // var activityInfo = Activity.getActivityInfo();
-        // var heartRateSample = activityInfo.currentHeartRate;
-        // var heartRateValue = null;
-        // if (heartRateSample != null) {
-        //     heartRateValue = heartRateSample.format("%d");
-        // }
-        // var heartRateView = View.findDrawableById("HeartRateLabel") as Text;
-        // if (heartRateValue == null) {
-        //     heartRateValue = "-";
-        // }
-        // heartRateView.setText(heartRateValue);
-
     }
 
     // Called when this View is removed from the screen. Save the
