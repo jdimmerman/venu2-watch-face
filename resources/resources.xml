@@ -1,0 +1,6 @@
+<resources>    
+    <fonts>
+   	    <font antialias="true" id="fontAwesomeFreeSolid" filename="fonts/fontAwesome/fontAwesomeFreeSolid.fnt" />
+   	    <font antialias="true" id="fontAwesomeFreeRegular" filename="fonts/fontAwesome/fontAwesomeFreeRegular.fnt" />
+    </fonts>
+</resources>
